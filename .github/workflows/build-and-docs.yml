@@ -157,6 +157,10 @@ jobs:
           mkdir -p site/data
           lake exe extract_names --exclude=statement,docstring,moduleDocstrings > site/data/conjectures.json || true
 
+      - name: Validate conjectures metadata
+        run: |
+          node scripts/validate_metadata.js site/data/conjectures.json
+
       - name: Extract Verso fragments for website
         run: |
           python3 site/extract_verso_fragments.py _literate_html site/data/verso-fragments.json
